@@ -25,3 +25,14 @@ III - Bug-ovi koje ste primijetili ali niste stigli ispraviti, a znate rješenje
         -Rješenje je podesiti margine i širinu.
 IV  - Bug-ovi koje ste primijetili ali ne znate rješenje
 V  - Lista fajlova u formatu NAZIVFAJLA - Opis u vidu jedne rečenice šta se u fajlu nalazi
+        index.html  -   početna stranica
+        projekti.html - stranica sa projektima
+        login.html  -   forma za prijavu na stranicu
+        about.html  -   o kompaniji
+        contact.html    -   kontakt forma
+        pitanja.html    -   lista prethodnih pitanja i odgovora, forma za postavljanje pitanja
+        projekt-detalji.html    -   detaljne informacije o projektu
+        projektx.jpg    -   testne slike
+        logo.png    -logo
+        skice
+        
