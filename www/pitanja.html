@@ -1,35 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Arhitektonski biro</title>
-        <link rel="stylesheet" href="stil.css">
-    </head>
-    
-   <body>
-      <div class="naslov"> 
-            <img id="logo_img" src="logo.png">
-            <h3 id="logo_text">Arhitektonski biro</h3>
-      </div>
-      
-      <div class="wrap_main">
-        <div class="meni">
-            <ul>
-                <li><a href="index.html">početna</a></li>
-                <li><a href="projekti.html">projekti</a></li>
-                <li><a href="usluge.html">usluge</a></li>
-                <li><a href="pitanja.html">pitanja</a></li>
-                <li><a href="about.html">o nama</a></li>
-                <li><a href="contact.html">kontakt</a></li>
-            </ul>
-        </div>
-        
+<div id="sadrzaj">
         <div class="pretraga">
-            <form action="pretraga.php" id="pretraga">
+            <form action="pretraga.php" id="pretraga" onsubmit="return validateSearch()" name="search_form">
                 <table>
                     <tr>
-                        <td><input type="text" maxlength="50" name="termin_pretrage"></td>
+                        <td><p id="error_msg_pretraga"></p></td>
+                        <td><input type="text" maxlength="150" name="termin_pretrage"></td>
                         <td><input type="submit" value="Traži"></td>
                     </tr>
                 </table>
@@ -72,7 +47,7 @@
      
     
         <div class="pitanje_form">
-        <form action="pitaj.php" id="pitanje_forma">
+        <form action="pitaj.php" id="pitanje_forma" name="kontakt_forma" onsubmit="return validateContactForm()">
             <table>
                 <tr>
                     <td>Ime:</td>
@@ -88,16 +63,19 @@
                 </tr>
                 <tr>
                     <td>Pitanje:</td>
-                    <td><textarea maxlength=1000 cols="50" rows="5" name="poruka" form="pitanje_form" text="Upisite pitanje"></textarea></td>
+                    <td><textarea maxlength=1000 cols="50" rows="5" id="pitanje" name="poruka" form="pitanje_form" text="Upisite pitanje"></textarea></td>
                 </tr>
                 
                 <tr>
                     <td></td>
                     <td><input type="submit" value="Posalji"></td>
                 </tr>
+                
+                <tr>
+                    <td></td>
+                    <td><p id="error_msg"></p></td>
+                </tr>
             </table>
         </div>
         </form>
-        
-    </body>
-</html>
+     </div>
