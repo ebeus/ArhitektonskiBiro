@@ -24,11 +24,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit("Neispravan mail.");
     }
 
-    if(!is_numeric($kvadratura) || $kvadratura < 0 || $kvadratura>1000000) {
-        header('Refresh: 2; URL=pitanja.php');
-        exit("Nevazeca kvadratura.");
-    }
-
     if(file_exists($xml_pitanja_path)) {
         $xml = simplexml_load_file($xml_pitanja_path) or die ("Error");
         $broj_unosa = count($xml->children());

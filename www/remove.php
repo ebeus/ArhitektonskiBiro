@@ -1,12 +1,13 @@
 <?php 
 	if(!isset($_SESSION)) { 
         session_start(); 
-    } else {
-    	if(!isset($_SESSION['admin'])) {
+    } 
+
+    if(!isset($_SESSION['admin'])) {
     		header("location: index.php");
     		exit();
-    		}
     }
+    
 	$xml_path = "xml/projekti.xml";
     if(!file_exists($xml_path)) {
         header('Refresh: 2; URL=add.php');

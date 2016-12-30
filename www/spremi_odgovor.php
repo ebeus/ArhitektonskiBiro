@@ -39,12 +39,6 @@
     } else {
     	$odobreno = false;
     }
-  
-
-   /* if($odobreno != true || $odobreno!=false) {
-    	header('Refresh: 2; URL=admin.php');
-        exit("O Error");
-    }*/
 
     $xml->pitanje[$id_pitanja]->odgovor = $odgovor;
     $xml->pitanje[$id_pitanja]->odobreno = $odobreno;

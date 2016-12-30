@@ -68,3 +68,26 @@ Spirala 2:
         10. **contact.html** - podstranica za kontakt
         11. **about.html** - podstranica koja prikazuje detalje o kompaniji
         12. **login.html** - login podstranica
+        
+Spirala 3:
+    Username: admin Password: pass
+    1. Šta je urađeno
+        1. Unos, brisanje i editovanje XML fajlova  (admin može i editovati i brisati)
+        2. Generisanje i download CSV fajla iz XML-a. Samo za admina.
+        3. Generisanje i prikaz PDF-a iz XML-a. Samo za admina.
+        4. Pretraga. Korisnik dobije sugestije za pretragu na osnovu XML fajla, prilikom klika na dugme traži izvršava se pretraga po tri polja (naslov, pitanje, odgovor na pitanje).
+    2. Šta nije urađeno
+        5. Deployment na OpenShift. Nije potvrđena registracija.
+    3. Bug-ovi koje ste primijetili ali niste stigli ispraviti, a znate rješenje (opis rješenja)
+    4. Bug-ovi koje ste primijetili ali ne znate rješenje
+    5. Lista fajlova u formatu NAZIVFAJLA - Opis u vidu jedne rečenice šta se u fajlu nalazi
+        1. add.php - dodaje se novi projekat
+        2. remove.php - brisanje projekta
+        3. admin.php - admin stranica (odogovori na pitanja, generisanje pdf i csv fajlova)
+        4. edit.php - editovanje projektovanja
+        5. search.js - javascript sa AJAX-om koja omogućava live search
+        6. livesearch.php - php skripta, pretraga xml fajla
+        7. search.php - stranica na kojoj se prikazuju rezultati pretrage
+        8. spremi_odgovor.php - spremanje odgovora na pitanje (admin)
+        9. send_contact.php - spremanje podatak iz kontakt forme
+        10. Ostali php fajlovi vezani za rad stranice

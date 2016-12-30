@@ -1,2 +1,2 @@
 <?xml version="1.0"?>
-<kontakti><kontakt><imeiprezime>Peto ime</imeiprezime><email>ime@email.com</email><tema>Test</tema><poruka>Neka poruka 123456</poruka></kontakt></kontakti>
+<kontakti><kontakt><imeiprezime>Peto ime</imeiprezime><email>ime@email.com</email><tema>Test</tema><poruka>Neka poruka 123456</poruka></kontakt><kontakt><imeiprezime>Neko Nekic</imeiprezime><email>nnekic@domena.com</email><tema>Neka tema</tema><poruka>Neka poruka. 0123456789 ABCDEF</poruka></kontakt></kontakti>

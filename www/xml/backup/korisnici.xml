@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<korisnici>
-	<korisnik>
-		<id>1</id>
-		<username>admin</username>
-		<password>pass</password>
-		<category>admin</category>
-	</korisnik>
-</korisnici>

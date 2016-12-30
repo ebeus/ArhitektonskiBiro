@@ -23,15 +23,13 @@
     			createCSV($xml,$_f);
     			fclose($_f);
 
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename='.basename($csv_path));
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($csv_path));
-    readfile($csv_path);
+                header('Pragma: public');
+                header('Content-Type: text/csv');
+                header('Content-Disposition: attachment; filename="kontakt.csv"');
+                header("Cache-Control: no-cache, must-revalidate");
+                readfile('csv/kontakt.csv');
+                exit;
 
-    			//header('Content-Disposition: attachment; filename="kontakt.csv";');
     	}else if(isset($_GET['tip']) && $_GET['tip']== "pdf") {
     		$pdf = new FPDF("p","mm","A4");
     		$pdf->AddPage();
@@ -42,7 +40,7 @@
 
     		$pdf->SetY(120);
     		$pdf->SetFont('Times','',20);
-    		$pdf->Cell(0,0,"Izvjestaj - Projekti",0,0,"C");
+    		$pdf->Cell(0,0,"Izvjestaj - Upiti",0,0,"C");
     		$pdf->AddPage();
     		$posY = 40;
     		$pdf->SetY($posY);
@@ -97,7 +95,7 @@
     
     <body>
       <div class="naslov"> 
-            <a href="index.html"><img id="logo_img" src="logo.png"></a>
+            <a href="index.php"><img id="logo_img" src="logo.png"></a>
             <h3 id="logo_text">Arhitektonski biro</h3>
       </div>
       

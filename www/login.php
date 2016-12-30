@@ -3,10 +3,52 @@
     { 
         session_start(); 
     } 
-	include ('login_script.php');
+	
 	if(isset($_SESSION['user'])) {
 		header("location: index.php");
 	}
+$error = '';
+    if($_SERVER['REQUEST_METHOD'] == "POST") {
+        
+    $username = '';
+    $password = '';
+    $found = false;
+    $admin = false;
+    if (empty($_POST['username']) || empty($_POST['password'])) {
+        $error = "Username ili password nisu uneseni.";
+    } else {
+        $username = data_filter($_POST['username']);
+        $password = data_filter($_POST['password']);
+        $xml = simplexml_load_file("xml/admin.xml") or die ("Error");
+        foreach ($xml->children() as $korisnici) {
+            if($korisnici->username == $username 
+                && $korisnici->password == md5($password)) {
+                    $found = true;
+                    if($korisnici['category'] == "Admin") {
+                        $admin == true;
+                        $_SESSION['admin'] = true;
+                    }
+                    break;
+            }
+        }
+
+        if($found) {
+            $_SESSION['user'] = $username;          
+            header("location: index.php");
+        } else {
+            $error = "Nevažeći username/password.";
+        }
+
+    }
+
+
+    }    
+
+    function data_filter($data)
+    {
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
 ?>
 <!DOCTYPE html> 
@@ -21,7 +63,7 @@
     <body>
 
       <div class="naslov"> 
-            <a href="index.html"><img id="logo_img" src="logo.png"></a>
+            <a href="index.php"><img id="logo_img" src="logo.png"></a>
             <h3 id="logo_text">Arhitektonski biro</h3>
       </div>
       
@@ -59,7 +101,7 @@
 
         <div id="sadrzaj">
         <div class="login_form">
-        <form action="login_script.php" method="POST" id="loginforma" name="login_form" onsubmit="return validateLogin()">
+        <form action="login.php" method="POST" id="loginforma" name="login_form" onsubmit="return validateLogin()">
             <table>
                 <tr>
                     <th></th>

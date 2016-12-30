@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<korisnici>
-	<korisnik category="Admin">
-		<username>admin</username>
-		<password>pass</password>
-	</korisnik>
-</korisnici>

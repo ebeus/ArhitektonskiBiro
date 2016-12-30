@@ -46,7 +46,7 @@
                 <?php
                    if(isset($_SESSION['admin'])) {
                     if($_SESSION['admin'] == true ) {
-                        echo '<li><a href="administracija.php"/>administracija</a></li>';
+                        echo '<li><a href="admin.php"/>administracija</a></li>';
                     }
                 }
                     
