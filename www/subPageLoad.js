@@ -9,7 +9,7 @@ function changesubPage(page) {
             document.getElementById("sadrzaj").innerHTML = ajax.responseText;
             history.pushState(page, "", window.location.href);
         
-            if(page == 'pocetna.html') {
+            if(page == 'pocetna.php' || page == 'pocetna.html') {
                 var script = document.createElement('script');
                 script.src = 'galerija.js';
                 script.onload = function(){};

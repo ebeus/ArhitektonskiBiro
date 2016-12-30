@@ -1,12 +1,11 @@
 
 window.onload = function() {
-    changesubPage("pocetna.html");
-    eval(prikazi(1));
+   
 };
 
 function spremi_podatke() {
-    if(document.kontakt_forma != 'undefined') {
-    var forma = document.kontakt_forma;
+    if(document.kontaktforma != 'undefined') {
+    var forma = document.kontaktforma;
     if(typeof(Storage) !== "undefined") {
         localStorage.setItem("ime_i_prezime",forma.Ime.value);
         localStorage.setItem("email",forma.email.value);
@@ -17,10 +16,10 @@ function spremi_podatke() {
 }
 }
 
-document.kontakt_forma.addEventListner("onload",restore_podataka());
+document.kontaktforma.addEventListner("onload",restore_podataka());
 function restore_podataka() {
-    if(document.kontakt_forma != 'undefined') {
-    var forma = document.kontakt_forma
+    if(document.kontaktforma != 'undefined') {
+    var forma = document.kontaktforma
      if(typeof(Storage) !== "undefined") {
         forma.Ime.value = localStorage.getItem("ime_i_prezime");
         forma.email.value = localStorage.getItem("email");
@@ -42,7 +41,6 @@ function validateContactForm() {
     error_message.style.color = "red";
     error_message.style.fontWeight = "bold";
     error_message.style.background = "#FFE5E5";
-    
     if(forma.Ime.value == "") {
         error_message.innerHTML = "Ime nije upisano";
         return false;
@@ -120,8 +118,8 @@ function validateSearch() {
     error_message.style.fontWeight = "bold";
     error_message.style.background = "#FFE5E5";
     
-    if(forma.termin_pretrage.value == "") {
-        error_message.innerHTML="x";
+    if(forma.termin.value == "") {
+        error_message.innerHTML="Prazno polje";
         return false;
     }
     return true;
@@ -135,7 +133,7 @@ function validateLogin() {
         error_message.style.fontWeight = "bold";
         error_message.style.background = "#FFE5E5";
         
-        if(forma.Username.value == "") {
+        if(forma.username.value == "") {
             error_message.innerHTML = "Unesite username";
             return false;
         }
@@ -144,5 +142,16 @@ function validateLogin() {
             error_message.innerHTML = "Unesite password";
             return false;
         }
+}
+
+function validateEdit() {
+    var error_message = document.getElementById('error_msg');
+    var forma = document.edit_forma;
+
+    error_message.style.color = "red";
+    error_message.style.fontWeight = "bold";
+    error_message.style.background = "#FFE5E5";
+
+    
 }
 

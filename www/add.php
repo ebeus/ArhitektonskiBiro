@@ -1,0 +1,131 @@
+<?php
+    if(!isset($_SESSION)) { 
+        session_start(); 
+    } 
+    if(!isset($_SESSION['admin'])) {
+            header("location: index.php");
+            exit();
+    }
+    $xml_projekti_path = "xml/projekti.xml";
+
+    if(file_exists($xml_projekti_path)) {
+        $xml = simplexml_load_file($xml_projekti_path) or die ("Error");
+        $broj_unosa = count($xml->children());
+        $_SESSION['id_projekta'] = $broj_unosa;
+         
+    } else {
+        $_SESSION['id_projekta'] = 0;
+        $xml = new SimpleXMLElement('<projekti></projekti>');
+        $xml->addChild('projekat');
+        $xml->projekat[0]->addChild('slikasrc',' ');
+        $xml->projekat[0]->addChild('tekst',' ');
+        $xml->asXML($xml_projekti_path);
+    }
+    $_SESSION['add'] = true;  
+?>
+
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Arhitektonski biro</title>
+        <link rel="stylesheet" href="stil.css">
+    </head>
+    
+    <body onload="prikazi(1)">
+      <script type="text/javascript" src="skripta.js"></script>
+      <div class="naslov"> 
+            <a href="index.php"><img id="logo_img" src="logo.png"></a>
+            <h3 id="logo_text">Arhitektonski biro</h3>
+      </div>
+
+      <div class="wrap_main">
+          <div class = "korisnici">
+            <p>
+                <?php
+                    if(!isset($_SESSION['user'])) {
+                        echo '<a href="login.php"> Prijava</a>';
+                    } else {
+                        echo 'Korisnik:<a>' .$_SESSION["user"].'</a>';
+                        echo '<a href="logout.php"> (Odjava)</a>';
+                    }
+                ?>
+            </p>
+          </div>
+        <div class="meni">
+            <ul>
+                <li><a href="index.php"/>početna</li>
+                <li><a href="projekti.php"/>projekti</li>
+                <li><a href="usluge.php"/>usluge</li>
+                <li><a href="pitanja.php"/>pitanja</li>
+                <li><a href="about.php"/>o nama</li>
+                <li><a href="kontakt.php"/>kontakt</a></li>    
+                <?php
+                   if(isset($_SESSION['admin'])) {
+                    if($_SESSION['admin'] == true ) {
+                        echo '<li><a href="admin.php"/>administracija</a></li>';
+                    }
+                }
+                    
+                ?>           
+            </ul>
+        </div>
+
+        <div id="sadrzaj">
+
+
+        <div class="edit_form">
+        <p>Dodavanje projekta</p>
+        <form id="edit_forma" action="save.php" onsubmit="return validateEdit()" name="edit_forma" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr>
+                	<td>
+                	</td>
+                	<td>
+                		Tekst
+                	</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><textarea maxlength=2000 cols="100" rows="10" name="tekst" form="edit_forma" text="tekst">
+
+                    </textarea></td>
+                </tr>
+
+                <tr>
+                	<td>
+                	</td>
+                	<td>
+
+                	</td>
+                </tr>
+
+                <tr>
+                	<td>Slika:</td>
+                	<td><input type="file" name="slika"> </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Spremi"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="error_msg"></p></td>
+                </tr>
+            </table>
+        </form>
+
+        </div>
+
+      </div>
+
+    </body>
+</html>
+        
