@@ -1,5 +1,5 @@
 <?php
-    require('lib/fpdf/fpdf.php');
+    require('/lib/fpdf/fpdf.php');
 	include 'utility.php';
     include 'xml_u_bazu.php';
     require 'baza.php';
