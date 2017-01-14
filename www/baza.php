@@ -4,10 +4,10 @@
     } 
 
 
-    $host = 'mysql-55-centos7-1-am865';
+    $host = getenv('OPENSHIFT_MYSQL_HOST');
 	$db_name = 'arhbirobaza';
-	$user = 'wtspirala';
-	$password= '123456';
+	$user = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
+	$password= getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
     
     $db = new PDO('mysql:dbname='.$db_name.';host='.$host,$user,$password);
     
