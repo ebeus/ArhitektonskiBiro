@@ -1,5 +1,5 @@
 <?php
-    require 'baza.php';
+    require '/baza.php';
     ob_clean();
     if(!isset($_SESSION)) 
     { 

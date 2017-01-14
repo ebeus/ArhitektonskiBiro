@@ -4,7 +4,7 @@
     } 
 
 
-    $host = 'mysql-55-centos7-1-am868';
+    $host = 'mysql-55-centos7-1-am865';
 	$db_name = 'arhbirobaza';
 	$user = 'wtspirala';
 	$password= '123456';
