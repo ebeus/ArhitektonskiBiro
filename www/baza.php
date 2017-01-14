@@ -6,10 +6,11 @@
 
     $host = getenv('OPENSHIFT_MYSQL_HOST');
 	$db_name = 'arhbirobaza';
+	$port = getenv('OPENSHIFT_MYSQL_DB_PORT');
 	$user = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
 	$password= getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
     
-    $db = new PDO('mysql:dbname='.$db_name.';host='.$host,$user,$password);
+    $db = new PDO('mysql:dbname='.$db_name.';host='.$host.';port='.$port,$user,$password);
     
     /*
         $unosi -> asocijativni niz, polje u tabeli => vrijednost
