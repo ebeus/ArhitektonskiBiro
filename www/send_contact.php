@@ -1,14 +1,15 @@
 <?php 
 	include "utility.php";
-
+    require 'baza.php';
 
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
 
+    $table = 'kontakt';
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $xml_kontakt_path = "xml/kontakt.xml";
 
     $ime_i_prezime = prepare($_POST['Ime']);
     $email = prepare($_POST['email']);
@@ -25,27 +26,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit("Neispravan mail.");
     }
 
-    if(file_exists($xml_kontakt_path)) {
-    	$xml = simplexml_load_file($xml_kontakt_path) or die ("Error");
-    	$broj_unosa = count($xml->children());
-    } else {
-    	$broj_unosa = 0;
- 		$xml = new SimpleXMLElement('<kontakti></kontakti>');
- 		$xml->addChild('kontakt');
- 		$xml->kontakt[0]->addChild('imeiprezime');
- 		$xml->kontakt[0]->addChild('email');
- 		$xml->kontakt[0]->addChild('tema');
- 		$xml->kontakt[0]->addChild('poruka');
-        $xml->asXML($xml_kontakt_path);
-    }
-
-
-    $xml->kontakt[$broj_unosa]->imeiprezime = $ime_i_prezime;
-    $xml->kontakt[$broj_unosa]->email = $email;
-    $xml->kontakt[$broj_unosa]->tema = $tema;
-    $xml->kontakt[$broj_unosa]->poruka = $poruka;
-    $xml->asXML($xml_kontakt_path);
-
+    $unosi = array('ime' => $ime_i_prezime, 'email' => $email, 'tema'=>$tema,'poruka' => $poruka);
+    unos($table,$unosi);
     echo "Poruka uspješno poslana!";
     header('Refresh: 2; URL=index.php');
 } else {

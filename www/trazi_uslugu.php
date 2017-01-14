@@ -1,11 +1,12 @@
 <?php 
 	include "utility.php";
-
+    require 'baza.php';
 
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
+    $table = 'usluge';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -30,32 +31,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit("Nevazeca kvadratura.");
     }
 
-    $xml_usluga_path = "xml/usluge.xml";
-
-    if(file_exists($xml_usluga_path)) {
-    	$xml = simplexml_load_file($xml_usluga_path) or die ("Error");
-    	$broj_unosa = count($xml->children());
-    } else {
-    	$broj_unosa = 0;
- 		$xml = new SimpleXMLElement('<usluge></usluge>');
- 		$xml->addChild('usluga');
- 		$xml->usluga[0]->addChild('imeiprezime');
- 		$xml->usluga[0]->addChild('email');
- 		$xml->usluga[0]->addChild('vrstausluge');
- 		$xml->usluga[0]->addChild('kvadratura');
- 		$xml->usluga[0]->addChild('poruka');
- 		$xml->usluga[0]->addChild('attachmentpath');
-        $xml->asXML($xml_usluga_path);
-    }
+    $unosi = array('ime' => $ime_i_prezime, 'email' => $email, 'vrstausluge' => $vrstausluge, 'kvadratura' => $kvadratura, 'poruka' => $poruka);   //wait
+    $attachmentpath = '';
 
 
-
-    $xml->usluga[$broj_unosa]->imeiprezime = $ime_i_prezime;
-    $xml->usluga[$broj_unosa]->email = $email;
-    $xml->usluga[$broj_unosa]->vrstausluge = $vrstausluge;
-    $xml->usluga[$broj_unosa]->kvadratura = $kvadratura;
-    $xml->usluga[$broj_unosa]->poruka = $poruka;
-	$xml->usluga[$broj_unosa]->attachmentpath = "";
 
 	if(isset($_FILES['prilog']) && $_FILES['prilog']['size'] != 0) {
 		$file_name = $_FILES['prilog']['name'];
@@ -77,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     	if(empty($errors)==true){
        	  move_uploaded_file($file_tmp,"uploads/".$file_name);
        	  $path = "uploads/".$file_name;
-       	  $xml->usluga[$broj_unosa]->attachmentpath = $path;
+       	  $attachmentpath = $path;
       	}else{
        	  print_r($errors);
        	  header('Refresh: 2; URL=usluge.php');
@@ -87,8 +66,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	} 
 
-    $xml->asXML($xml_usluga_path);
 
+    $unosi['path'] = $attachmentpath;
+    unos($table,$unosi);
     echo "Uspješno dodano!";
     header('Refresh: 3; URL=index.php');
 }

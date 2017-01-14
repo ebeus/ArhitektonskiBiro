@@ -16,7 +16,6 @@
     </head>
     
     <body>
-      <script type="text/javascript" src="galerija.js"></script>
       <div class="naslov"> 
             <a href="index.php"><img id="logo_img" src="logo.png"></a>
             <h3 id="logo_text">Arhitektonski biro</h3>

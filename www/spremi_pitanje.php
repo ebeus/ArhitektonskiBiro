@@ -1,11 +1,13 @@
 <?php
     include "utility.php";
-
+    require 'baza.php';
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-    
+
+    $table = 'pitanja';
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $xml_pitanja_path = "xml/pitanja.xml";
 
@@ -24,29 +26,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit("Neispravan mail.");
     }
 
-    if(file_exists($xml_pitanja_path)) {
-        $xml = simplexml_load_file($xml_pitanja_path) or die ("Error");
-        $broj_unosa = count($xml->children());
-    } else {
-        $broj_unosa = 0;
-        $xml = new SimpleXMLElement('<pitanja></pitanja>');
-        $xml->addChild('pitanje');
-        $xml->pitanje[0]->addChild('imeiprezime');
-        $xml->pitanje[0]->addChild('email');
-        $xml->pitanje[0]->addChild('tema');
-        $xml->pitanje[0]->addChild('tekst');
-        $xml->pitanje[0]->addChild('odgovor');
-        $xml->asXML($xml_pitanja_path);
-    }
+    $unosi = array('ime' => $ime_i_prezime, 'email' => $email, 'tema' => $tema, 'pitanje' => $tekst );
+
+    unos($table,$unosi);
 
 
-
-    $xml->pitanje[$broj_unosa]->imeiprezime = $ime_i_prezime;
-    $xml->pitanje[$broj_unosa]->email = $email;
-    $xml->pitanje[$broj_unosa]->tema = $tema;
-    $xml->pitanje[$broj_unosa]->tekst = $tekst;
-    $xml->pitanje[$broj_unosa]->odgovor = "";
-    $xml->asXML($xml_pitanja_path);
     echo "Uspješno dodano!";
     header('Refresh: 2; URL=pitanja.php');
 }

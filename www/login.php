@@ -1,4 +1,5 @@
 <?php
+    require 'baza.php';
 	if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -19,15 +20,18 @@ $error = '';
     } else {
         $username = data_filter($_POST['username']);
         $password = data_filter($_POST['password']);
-        $xml = simplexml_load_file("xml/admin.xml") or die ("Error");
-        foreach ($xml->children() as $korisnici) {
-            if($korisnici->username == $username 
-                && $korisnici->password == md5($password)) {
+
+        $table = 'korisnici';
+        $polja = array('username','password');
+        $rezultat = procitaj($table,$polja);
+
+        //svaki korisnik je admin za sad
+        foreach ($rezultat as $korisnici) {
+                      if($korisnici['username'] == $username 
+                && $korisnici['password'] == md5($password)) {
                     $found = true;
-                    if($korisnici['category'] == "Admin") {
-                        $admin == true;
-                        $_SESSION['admin'] = true;
-                    }
+                    $admin == true;
+                    $_SESSION['admin'] = true;
                     break;
             }
         }

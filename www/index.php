@@ -1,15 +1,15 @@
 <?php
+    require 'baza.php';
+    ob_clean();
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
 
-    $xml_projekti_path = "xml/projekti.xml";
-
-    if(file_exists($xml_projekti_path)) {
-        $xml = simplexml_load_file("xml/projekti.xml") or die ("Error");
-        $broj_unosa = count($xml->children());
-    }
+    $table = 'projekti';
+    $polja = array("slikasrc","tekst");
+    $rezultat = procitaj($table, $polja);
+    
 ?>
 
 <!DOCTYPE html> 
@@ -88,7 +88,35 @@
                 
                 
         <?php 
+            for($i = 0; $i < 4; $i+=2) {
+                echo '<div class="red">';
+                echo '<div class="projekt">';
+                echo '<div class="projekt jedan">';
+                echo '<div class="projekt_opis">';
+                echo '<p id="kratakOpis">'. $rezultat[$i]['tekst']. '</p>';
+                echo '</div>';
+                echo '<div class="projekt_slika">';
+                echo '<img src="'.$rezultat[$i]['slikasrc'].'">';
+                echo '</div>';
+                echo '</div>';
 
+                
+
+                echo '<div class="projekt jedan">';
+                echo '<div class="projekt_opis">';
+                echo '<p id="kratakOpis">'. $rezultat[$i+1]['tekst']. '</p>';
+                echo '</div>';
+                echo '<div class="projekt_slika">';
+                echo '<img src="'.$rezultat[$i+1]['slikasrc'].'">';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+
+                
+            }
+        
+        /*
 
         if(file_exists($xml_projekti_path)) {
             for($i = 0; $i < 4; $i+=2) {
@@ -122,7 +150,7 @@
                 echo '</div>';
 
             }
-        }
+        }*/
         ?>
     
         </div>

@@ -1,4 +1,5 @@
 <?php
+    require 'baza.php';
 	if(!isset($_SESSION)) { 
         session_start(); 
     } 
@@ -7,31 +8,16 @@
     		exit();
     }
        	
-    $xml_projekti_path = "xml/projekti.xml";
-
-    if(file_exists($xml_projekti_path)) {
     if(!isset($_GET['id'])) {
     	header('Refresh: 2; URL=projekti.php');
     	exit("ID Error");
     }
-
+    $table = 'projekti';
 	$id_projekta = intval($_GET['id']);
     $_SESSION['id_projekta'] = $id_projekta;
-
-    $xml = simplexml_load_file($xml_projekti_path) or die ("Error");
-    $broj_unosa = count($xml->children());
-
-
-    if($broj_unosa < $id_projekta) {
-    	header('Refresh: 2; URL=projekti.php');
-    	exit("Pogresan ID ".$id_projekta);
-    }
-
-    } else {
-        header('Refresh: 2; URL=add.php');
-        exit("Potrebno je prvo dodati projekat");
-    }
-    
+    $polja = array('slikasrc','tekst');
+    $projekat = procitaj_id($table,$polja,$id_projekta);
+    $_SESSION['edit'] = "true"; 
 ?>
 
 <!DOCTYPE html> 
@@ -105,7 +91,8 @@
                     <td></td>
                     <td><textarea maxlength=2000 cols="100" rows="10" name="tekst" form="edit_forma" text="tekst">
                     	<?php
-                    		echo $xml->projekat[$id_projekta]->tekst;
+                            if(!is_null($projekat))
+                    		echo $projekat[0]['tekst'];
                     	?>
                     </textarea></td>
                 </tr>
@@ -115,7 +102,8 @@
                 	</td>
                 	<td>
                 		<?php 
-                			echo '<img src="'.$xml->projekat[$id_projekta]->slikasrc.'"></img>';
+                          if(!is_null($projekat))
+                			echo '<img src="'.$projekat[0]['slikasrc'].'"></img>';
                 		 ?>
                 	</td>
                 </tr>

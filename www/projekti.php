@@ -4,12 +4,12 @@
         session_start(); 
     } 
 
-    $xml_projekti_path = "xml/projekti.xml";
 
-    if(file_exists($xml_projekti_path)) {
-        $xml = simplexml_load_file($xml_projekti_path) or die ("Error");
-        $broj_unosa = count($xml->children());
-    }
+    require 'baza.php';
+    $table = 'projekti';
+    $polja = array("id","slikasrc","tekst");
+    $rezultat = procitaj($table, $polja);
+    $broj_unosa = count($rezultat);
 ?>
 
 <!DOCTYPE html> 
@@ -65,7 +65,6 @@
         if(isset($_SESSION['admin'])) {
             echo '<a href="add.php"><img id="kontrola" src="./ikone/add.png"></img></a>';
         }
-        if(file_exists($xml_projekti_path)) {
 
             for($i = 0; $i < $broj_unosa; $i+=2) {
                 echo '<div class="red">';
@@ -76,34 +75,35 @@
                 if(isset($_SESSION['admin'])) {
                     echo '<div class="edit_icons">';
                     
-                    echo '<a href="edit.php?id='.$i.'"><img id="kontrola" src="./ikone/edit.png"></img></a>';
-                    echo '<a href="remove.php?id='.$i.'"><img id="kontrola" src="./ikone/remove.png"></img></a>';
+                    echo '<a href="edit.php?id='.$rezultat[$i]['id'].'"><img id="kontrola" src="./ikone/edit.png"></img></a>';
+                    echo '<a href="remove.php?id='.$rezultat[$i]['id'].'"><img id="kontrola" src="./ikone/remove.png"></img></a>';
                     echo '</div>';
                 }
-                echo '<p id="kratakOpis">'. $xml->projekat[$i]->tekst. '</p>';
+                echo '<p id="kratakOpis">'. $rezultat[$i]['tekst']. '</p>';
                 echo '</div>'; //DIV KRATAK OPIS
                 echo '<div class="projekt_slika">';
-                echo '<img src="'.$xml->projekat[$i]->slikasrc.'">';
+                echo '<img src="'.$rezultat[$i]['slikasrc'].'">';
                 echo '</div>';
                 echo '</div>';
 
                 
 
-                if(is_object($xml->projekat[$i+1])) {
+            //    if(is_object($xml->projekat[$i+1])) {
+                if(!is_null($rezultat[$i+1]['id'])) {
                     echo '<div class="projekt jedan">';
                     echo '<div class="projekt_opis">';
 
                     if(isset($_SESSION['admin'])) {
                         echo '<div class="edit_icons">';
-                        echo '<a href="edit.php?id='.($i+1).'"><img id="kontrola" src="./ikone/edit.png"></img></a>';
-                        echo '<a href="remove.php?id='.($i+1).'"><img id="kontrola" src="./ikone/remove.png"></img></a>';
+                        echo '<a href="edit.php?id='.$rezultat[$i+1]['id'].'"><img id="kontrola" src="./ikone/edit.png"></img></a>';
+                        echo '<a href="remove.php?id='.$rezultat[$i+1]['id'].'"><img id="kontrola" src="./ikone/remove.png"></img></a>';
                         echo '</div>';
                     }
 
-                    echo '<p id="kratakOpis">'. $xml->projekat[$i+1]->tekst. '</p>';
+                    echo '<p id="kratakOpis">'. $rezultat[$i+1]['tekst']. '</p>';
                     echo '</div>';
                     echo '<div class="projekt_slika">';
-                    echo '<img src="'.$xml->projekat[$i+1]->slikasrc.'">';
+                    echo '<img src="'.$rezultat[$i+1]['slikasrc'].'">';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
@@ -113,7 +113,7 @@
                 echo '</div>';
 
             }
-        }
+        
         ?>
             </div>
 </body>

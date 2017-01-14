@@ -1,6 +1,6 @@
 <?php
 	include "utility.php";
-
+    require 'baza.php';
     if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -10,13 +10,8 @@
             header("location: index.php");
             exit();
     }
-
-    $xml_pitanja_path = "xml/pitanja.xml";
-    if(file_exists($xml_pitanja_path)) {
-        $xml = simplexml_load_file($xml_pitanja_path) or die ("Error");
-        $broj_unosa = count($xml->children());
-    } 
-    
+    $table = 'pitanja';
+  
 
     if(!isset($_POST['id_pitanja'])) {
     	header('Refresh: 2; URL=admin.php');
@@ -29,21 +24,11 @@
     }
 
     $id_pitanja = intval($_POST['id_pitanja']);
-
-
-
     $odgovor = prepare($_POST['tekstodgovora']);
+    $polja = array('odgovor' => $odgovor);
+    update_by_id($table,$polja,$id_pitanja);
 
-    if(isset($_POST['odobreno']) && $_POST['odobreno'] == 'Yes') {
-    	$odobreno = true;
-    } else {
-    	$odobreno = false;
-    }
 
-    $xml->pitanje[$id_pitanja]->odgovor = $odgovor;
-    $xml->pitanje[$id_pitanja]->odobreno = $odobreno;
-
-    $xml->asXML($xml_pitanja_path);
     echo "Uspješno dodano!";
     header('Refresh: 5; URL=pitanja.php');
 ?>

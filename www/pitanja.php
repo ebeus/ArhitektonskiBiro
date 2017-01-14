@@ -1,14 +1,13 @@
 <?php
+    require 'baza.php';
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
     
-    $xml_pitanja_path = "xml/pitanja.xml";
-    if(file_exists($xml_pitanja_path)) {
-        $xml = simplexml_load_file($xml_pitanja_path) or die ("Error");
-        $broj_unosa = count($xml->children());
-    }
+    $table = 'pitanja';
+    $polja = array("*");
+    $rezultat = procitaj($table, $polja);
 ?>
 
 <!DOCTYPE html> 
@@ -86,6 +85,22 @@
         
         <div class="wrap_pitanja">
         <?php 
+            foreach($rezultat as $pitanje) {
+                echo '<div class="wrap_pitanje">';
+                    echo '<div class ="naslov">';
+                    echo '<h4>'.$pitanje['tema'].'</h4>';
+                    echo '</div>';
+
+                    echo '<div class="pitanje">';
+                    echo '<p>'.$pitanje['pitanje'].'</p>';
+                    echo '</div>';
+
+                    echo '<div class="odgovor">';
+                    echo '<p>'.$pitanje['odgovor'].'</p>';
+                    echo '</div>';
+            }
+        /*
+            foreach($rezultat as $pitanje)
             if(file_exists($xml_pitanja_path)) {
                 foreach ($xml->children() as $pitanje) {
                     echo '<div class="wrap_pitanje">';
@@ -102,7 +117,7 @@
                     echo '</div>';
                     
                 }
-            }
+            }*/
         ?>
         </div>
         </div>

@@ -6,22 +6,8 @@
             header("location: index.php");
             exit();
     }
-    $xml_projekti_path = "xml/projekti.xml";
 
-    if(file_exists($xml_projekti_path)) {
-        $xml = simplexml_load_file($xml_projekti_path) or die ("Error");
-        $broj_unosa = count($xml->children());
-        $_SESSION['id_projekta'] = $broj_unosa;
-         
-    } else {
-        $_SESSION['id_projekta'] = 0;
-        $xml = new SimpleXMLElement('<projekti></projekti>');
-        $xml->addChild('projekat');
-        $xml->projekat[0]->addChild('slikasrc',' ');
-        $xml->projekat[0]->addChild('tekst',' ');
-        $xml->asXML($xml_projekti_path);
-    }
-    $_SESSION['add'] = true;  
+    $_SESSION['add'] = "true";  
 ?>
 
 <!DOCTYPE html> 

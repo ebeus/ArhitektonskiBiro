@@ -1,15 +1,14 @@
 <?php
     include 'utility.php';
+    include 'baza.php';
+
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
     
-    $xml_pitanja_path = "xml/pitanja.xml";
-    if(file_exists($xml_pitanja_path)) {
-        $xml = simplexml_load_file($xml_pitanja_path) or die ("Error");
-        $broj_unosa = count($xml->children());
-    }
+
+    $tabela = 'pitanja';
 
     if(isset($_GET['termin'])) {
         $termin = prepare($_GET['termin']);
@@ -92,25 +91,26 @@
         
         <div class="wrap_pitanja">
         <?php 
-            if(file_exists($xml_pitanja_path)) {
-                foreach ($xml->children() as $pitanje) {
+            $sve = array('' => '*');
+            $rezultat = $procitaj($table,$sve)
+            foreach ($rezultat as $pitanje) {
 
-                    if(stristr($pitanje->tekst,$termin) || stristr($pitanje->tema,$termin) || stristr($pitanje->odgovor, $termin)) {
-                    echo '<div class="wrap_pitanje">';
-                    echo '<div class ="naslov">';
-                    echo '<h4>'.$pitanje->tema.'</h4>';
-                    echo '</div>';
+                if(stristr($pitanje['pitanje'],$termin) || stristr($pitanje['tema'],$termin) || stristr($pitanje['odgovor'], $termin)) {
+                echo '<div class="wrap_pitanje">';
+                echo '<div class ="naslov">';
+                echo '<h4>'.$pitanje['tema'].'</h4>';
+                echo '</div>';
 
-                    echo '<div class="pitanje">';
-                    echo '<p>'.$pitanje->tekst.'</p>';
-                    echo '</div>';
+                echo '<div class="pitanje">';
+                echo '<p>'.$pitanje['tekst'].'</p>';
+                echo '</div>';
 
-                    echo '<div class="odgovor">';
-                    echo '<p>'.$pitanje->odgovor.'</p>';
-                    echo '</div>';
-                  }
+                echo '<div class="odgovor">';
+                echo '<p>'.$pitanje['odgovor'].'</p>';
+                echo '</div>';
                 }
             }
+            
         ?>
         </div>
         </div>

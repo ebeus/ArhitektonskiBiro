@@ -7,11 +7,11 @@
   		return $data;
 	}
 
-  function createCSV($xml,$f) {
-    $polja = array("imeiprezime","email","tema","poruka");
+  function createCSV($rezultat,$f) {
+    $polja = array("id","imeiprezime","email","tema","poruka");
     fputcsv($f, $polja,',','"');
-    foreach ($xml->children() as $kontakt) {
-        $val = array($kontakt->imeiprezime,$kontakt->email,$kontakt->tema,$kontakt->poruka);
+    foreach ($rezultat as $kontakt) {
+        $val = array($kontakt['id'],$kontakt['ime'],$kontakt['email'],$kontakt['tema'],$kontakt['poruka']);
         fputcsv($f, $val,',','"');
       }
   }
