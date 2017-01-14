@@ -1,6 +1,6 @@
 <?php
-    include "utility.php";
-    require 'baza.php';
+    include "/utility.php";
+    require '/baza.php';
     if(!isset($_SESSION)) 
     { 
         session_start(); 

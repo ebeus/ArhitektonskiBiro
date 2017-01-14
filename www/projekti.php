@@ -1,11 +1,10 @@
 <?php
+    require '/baza.php';
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
 
-
-    require 'baza.php';
     $table = 'projekti';
     $polja = array("id","slikasrc","tekst");
     $rezultat = procitaj($table, $polja);

@@ -9,7 +9,7 @@
 	$user = 'wtspirala';
 	$password= '123456';
     
-    $db = new PDO('mysql:host='.$host.'; dbname='.$db_name.'; charset=utf8',$user,$password);
+    $db = new PDO('mysql:dbname='.$db_name.';host='.$host,$user,$password);
     
     /*
         $unosi -> asocijativni niz, polje u tabeli => vrijednost

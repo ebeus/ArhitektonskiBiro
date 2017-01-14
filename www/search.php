@@ -1,6 +1,6 @@
 <?php
-    include 'utility.php';
-    include 'baza.php';
+    include '/utility.php';
+    include '/baza.php';
 
     if(!isset($_SESSION)) 
     { 
