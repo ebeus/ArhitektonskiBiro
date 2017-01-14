@@ -113,3 +113,5 @@ Spirala 4:
         **   baza.php -> razne funkcije za rad s bazom (čitanje, pisanje, brisanje) **
         
     Na screen shotovima se vidi GET request prema serveru, šalje se id, u tabeli se traži odgovarajući unos i vraća u JSON formatu.
+    
+    Stranica: http://arhbiro-arhitektonski-biro.44fs.preview.openshiftapps.com/
