@@ -1,5 +1,5 @@
 <?php 	
-	require '/baza.php';
+	require 'baza.php';
 	function zag() {
     	header("{$_SERVER['SERVER_PROTOCOL']} 200 OK");
     	header('Content-Type: text/html');

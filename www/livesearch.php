@@ -1,5 +1,5 @@
 <?php
-    require '/baza.php';
+    require 'baza.php';
 	if(!isset($_SESSION)) 
     { 
         session_start(); 
