@@ -91,3 +91,25 @@ Spirala 3:
         8. spremi_odgovor.php - spremanje odgovora na pitanje (admin)
         9. send_contact.php - spremanje podatak iz kontakt forme
         10. Ostali php fajlovi vezani za rad stranice
+        
+Spirala 4:
+    Urađeno:
+        1. **Napravljena MySQL baza sa tabelama **
+        2. **Napisana skripta za prebacivanje podataka iz XML fajlova u bazu**
+        3. **Sa podacima se radi kroz bazu umjesto XML **
+        4. ** Hosting napravljen **
+        5. ** Napravljena REST metoda za čitanje iz baze i vraćanje podataka u JSON formatu. **
+        6. ** Web servis testiran**
+    Nije urađeno:
+        -
+    Lista fajlova:
+    
+        ** Fajlovi su ostali uglavnom isti, izmjenjen je način pristupa podacima (XML->MySQL). **
+        
+        ** Dodana su dva nova fajla u odnosu na prethodnu spiralu: **
+        
+        **  rest.php -> web servis (prima HTTP zahtjeve i šalje odgovor) **
+          
+        **   baza.php -> razne funkcije za rad s bazom (čitanje, pisanje, brisanje) **
+        
+    Na screen shotovima se vidi GET request prema serveru, šalje se id, u tabeli se traži odgovarajući unos i vraća u JSON formatu.
