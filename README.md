@@ -93,6 +93,7 @@ Spirala 3:
         10. Ostali php fajlovi vezani za rad stranice
         
 Spirala 4:
+    Stranica: http://arhbiro-arhitektonski-biro.44fs.preview.openshiftapps.com/
     Urađeno:
         1. **Napravljena MySQL baza sa tabelama **
         2. **Napisana skripta za prebacivanje podataka iz XML fajlova u bazu**
@@ -114,4 +115,4 @@ Spirala 4:
         
     Na screen shotovima se vidi GET request prema serveru, šalje se id, u tabeli se traži odgovarajući unos i vraća u JSON formatu.
     
-    Stranica: http://arhbiro-arhitektonski-biro.44fs.preview.openshiftapps.com/
+
